@@ -1,0 +1,5 @@
+input.txt
+------------
+hello world
+hello spark
+hello docker spark
