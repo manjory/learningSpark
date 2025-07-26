@@ -1,0 +1,37 @@
+Downloading dataset...
+Download complete.
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/07/26 13:29:45 WARN Utils: Your hostname, manjoryAshu.local, resolves to a loopback address: 127.0.0.1; using 192.168.0.157 instead (on interface en0)
+25/07/26 13:29:45 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+25/07/26 13:29:46 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+root
+ |-- 2017 NAICS Code: string (nullable = true)
+ |-- 2017 NAICS Title: string (nullable = true)
+ |-- GHG: string (nullable = true)
+ |-- Unit: string (nullable = true)
+ |-- Supply Chain Emission Factors without Margins: string (nullable = true)
+ |-- Margins of Supply Chain Emission Factors: string (nullable = true)
+ |-- Supply Chain Emission Factors with Margins: string (nullable = true)
+ |-- Reference USEEIO Code: string (nullable = true)
+
++---------------+-------------------------------------------------+--------+---------------------------------+---------------------------------------------+----------------------------------------+------------------------------------------+---------------------+
+|2017 NAICS Code|2017 NAICS Title                                 |GHG     |Unit                             |Supply Chain Emission Factors without Margins|Margins of Supply Chain Emission Factors|Supply Chain Emission Factors with Margins|Reference USEEIO Code|
++---------------+-------------------------------------------------+--------+---------------------------------+---------------------------------------------+----------------------------------------+------------------------------------------+---------------------+
+|111110         |Soybean Farming                                  |All GHGs|kg CO2e/2022 USD, purchaser price|0.488                                        |0.044                                   |0.532                                     |1111A0               |
+|111120         |Oilseed (except Soybean) Farming                 |All GHGs|kg CO2e/2022 USD, purchaser price|0.488                                        |0.044                                   |0.532                                     |1111A0               |
+|111130         |Dry Pea and Bean Farming                         |All GHGs|kg CO2e/2022 USD, purchaser price|0.809                                        |0.04                                    |0.848                                     |1111B0               |
+|111140         |Wheat Farming                                    |All GHGs|kg CO2e/2022 USD, purchaser price|0.809                                        |0.04                                    |0.848                                     |1111B0               |
+|111150         |Corn Farming                                     |All GHGs|kg CO2e/2022 USD, purchaser price|0.809                                        |0.04                                    |0.848                                     |1111B0               |
+|111160         |Rice Farming                                     |All GHGs|kg CO2e/2022 USD, purchaser price|0.809                                        |0.04                                    |0.848                                     |1111B0               |
+|111191         |Oilseed and Grain Combination Farming            |All GHGs|kg CO2e/2022 USD, purchaser price|0.809                                        |0.04                                    |0.848                                     |1111B0               |
+|111199         |All Other Grain Farming                          |All GHGs|kg CO2e/2022 USD, purchaser price|0.809                                        |0.04                                    |0.848                                     |1111B0               |
+|111211         |Potato Farming                                   |All GHGs|kg CO2e/2022 USD, purchaser price|0.591                                        |0.041                                   |0.631                                     |111200               |
+|111219         |Other Vegetable (except Potato) and Melon Farming|All GHGs|kg CO2e/2022 USD, purchaser price|0.591                                        |0.041                                   |0.631                                     |111200               |
++---------------+-------------------------------------------------+--------+---------------------------------+---------------------------------------------+----------------------------------------+------------------------------------------+---------------------+
+only showing top 10 rows
+
+Process finished with exit code 0
