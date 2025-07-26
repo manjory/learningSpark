@@ -1,0 +1,83 @@
+📂 File already exists locally.
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/07/26 14:34:13 WARN Utils: Your hostname, manjoryAshu.local, resolves to a loopback address: 127.0.0.1; using 192.168.0.157 instead (on interface en0)
+25/07/26 14:34:13 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+25/07/26 14:34:14 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+root
+ |-- 2017 NAICS Code: string (nullable = true)
+ |-- 2017 NAICS Title: string (nullable = true)
+ |-- GHG: string (nullable = true)
+ |-- Unit: string (nullable = true)
+ |-- Supply Chain Emission Factors without Margins: string (nullable = true)
+ |-- Margins of Supply Chain Emission Factors: string (nullable = true)
+ |-- Supply Chain Emission Factors with Margins: string (nullable = true)
+ |-- Reference USEEIO Code: string (nullable = true)
+
+🔁 Word Count BEFORE merge:
+🔤 Running word count on column: 2017 NAICS Code
++------+-----+
+|word  |count|
++------+-----+
+|322211|1    |
+|326111|1    |
+|332993|1    |
+|811212|1    |
+|326212|1    |
+|339940|1    |
+|424590|1    |
+|532111|1    |
+|721211|1    |
+|812113|1    |
++------+-----+
+only showing top 10 rows
+📋 Available columns: ['2017 NAICS Code', '2017 NAICS Title', 'GHG', 'Unit', 'Supply Chain Emission Factors without Margins', 'Margins of Supply Chain Emission Factors', 'Supply Chain Emission Factors with Margins', 'Reference USEEIO Code']
++--------+---------------------------------+
+|GHG     |Unit                             |
++--------+---------------------------------+
+|All GHGs|kg CO2e/2022 USD, purchaser price|
+|All GHGs|kg CO2e/2022 USD, purchaser price|
+|All GHGs|kg CO2e/2022 USD, purchaser price|
+|All GHGs|kg CO2e/2022 USD, purchaser price|
+|All GHGs|kg CO2e/2022 USD, purchaser price|
++--------+---------------------------------+
+only showing top 5 rows
+✅ Merging 'GHG' and 'Unit' columns...
+🔁 Word Count AFTER merge:
+🔤 Running word count on column: 2017 NAICS Code
++------+-----+
+|word  |count|
++------+-----+
+|322211|1    |
+|326111|1    |
+|332993|1    |
+|811212|1    |
+|326212|1    |
+|339940|1    |
+|424590|1    |
+|532111|1    |
+|721211|1    |
+|812113|1    |
++------+-----+
+only showing top 10 rows
++---------------+-------------------------------------------------+---------------------------------------------+----------------------------------------+------------------------------------------+---------------------+-------------------------------------------+
+|2017 NAICS Code|2017 NAICS Title                                 |Supply Chain Emission Factors without Margins|Margins of Supply Chain Emission Factors|Supply Chain Emission Factors with Margins|Reference USEEIO Code|GHG and Units                              |
++---------------+-------------------------------------------------+---------------------------------------------+----------------------------------------+------------------------------------------+---------------------+-------------------------------------------+
+|111110         |Soybean Farming                                  |0.488                                        |0.044                                   |0.532                                     |1111A0               |All GHGs, kg CO2e/2022 USD, purchaser price|
+|111120         |Oilseed (except Soybean) Farming                 |0.488                                        |0.044                                   |0.532                                     |1111A0               |All GHGs, kg CO2e/2022 USD, purchaser price|
+|111130         |Dry Pea and Bean Farming                         |0.809                                        |0.04                                    |0.848                                     |1111B0               |All GHGs, kg CO2e/2022 USD, purchaser price|
+|111140         |Wheat Farming                                    |0.809                                        |0.04                                    |0.848                                     |1111B0               |All GHGs, kg CO2e/2022 USD, purchaser price|
+|111150         |Corn Farming                                     |0.809                                        |0.04                                    |0.848                                     |1111B0               |All GHGs, kg CO2e/2022 USD, purchaser price|
+|111160         |Rice Farming                                     |0.809                                        |0.04                                    |0.848                                     |1111B0               |All GHGs, kg CO2e/2022 USD, purchaser price|
+|111191         |Oilseed and Grain Combination Farming            |0.809                                        |0.04                                    |0.848                                     |1111B0               |All GHGs, kg CO2e/2022 USD, purchaser price|
+|111199         |All Other Grain Farming                          |0.809                                        |0.04                                    |0.848                                     |1111B0               |All GHGs, kg CO2e/2022 USD, purchaser price|
+|111211         |Potato Farming                                   |0.591                                        |0.041                                   |0.631                                     |111200               |All GHGs, kg CO2e/2022 USD, purchaser price|
+|111219         |Other Vegetable (except Potato) and Melon Farming|0.591                                        |0.041                                   |0.631                                     |111200               |All GHGs, kg CO2e/2022 USD, purchaser price|
++---------------+-------------------------------------------------+---------------------------------------------+----------------------------------------+------------------------------------------+---------------------+-------------------------------------------+
+only showing top 10 rows
+Spark job completed.
+
+Process finished with exit code 0
