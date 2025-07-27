@@ -47,7 +47,7 @@ def merge_ghg_unit_columns(df):
 def main():
     # Step 1: Download
     url = "https://pasteur.epa.gov/uploads/10.23719/1531143/SupplyChainGHGEmissionFactors_v1.3.0_NAICS_CO2e_USD2022.csv"
-    local_path = "/tmp/SupplyChainGHGEmissionFactors.csv"
+    local_path = "/opt/spark-data/SupplyChainGHGEmissionFactors.csv"
     download_dataset(url, local_path)
 
     # Step 2: Spark Session
@@ -72,7 +72,7 @@ def main():
     df.show(10, truncate=False)
 
     # Step 8: Save to JSON
-    df.write.mode("overwrite").json("/tmp/spark-ghg-output.json")
+    df.write.mode("overwrite").json("/opt/spark-data/SupplyChainGHGEmissionFactors.csv")
 
     spark.stop()
     print("✅ Spark job completed.")

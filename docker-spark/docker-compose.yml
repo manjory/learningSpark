@@ -3,18 +3,16 @@ services:
   spark-master:
     image: bitnami/spark:latest
     environment:
-      - SPARK_MODE=master
+      - HOME=/root
     ports:
-      - "8080:8080"
-      - "7077:7077"
+      - "7078:7077"
+      - "8081:8080"
 
   spark-worker-1:
     image: bitnami/spark:latest
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
     depends_on:
       - spark-master
 
@@ -23,8 +21,6 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
     depends_on:
       - spark-master
 
@@ -33,7 +29,17 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
     depends_on:
       - spark-master
+
+  spark-submit:
+    image: bitnami/spark:latest
+    depends_on:
+      - spark-master
+    volumes:
+      - ./data:/opt/spark-data                   # Mount
+    command: >
+      spark-submit
+      --master spark://spark-master:7077
+      --deploy-mode client
+      /opt/spark-data/ghg_script.py
