@@ -1,18 +1,24 @@
+import time
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import explode, split, col, concat_ws
 import requests
 import os
 
-def download_dataset(url: str, local_path: str):
-    """Download file if it doesn't exist locally."""
-    if not os.path.exists(local_path):
-        print("⬇️ Downloading dataset...")
-        response = requests.get(url)
-        with open(local_path, "wb") as f:
-            f.write(response.content)
-        print("✅ Download complete.")
+def download_dataset(url, dst_dir):
+    os.makedirs(dst_dir, exist_ok=True)
+    filename = url.split("/")[-1]
+    file_path = os.path.join(dst_dir, filename)
+
+    if not os.path.exists(file_path):
+        print(f"Downloading to: {file_path}")
+        r = requests.get(url)
+        with open(file_path, "wb") as f:
+            f.write(r.content)
     else:
-        print("📂 File already exists locally.")
+        print(f"File already exists at: {file_path}")
+
+    return file_path
 
 def run_word_count(df):
     """Run a basic word count on the first text column found."""
@@ -47,21 +53,21 @@ def merge_ghg_unit_columns(df):
 def main():
     # Step 1: Download
     url = "https://pasteur.epa.gov/uploads/10.23719/1531143/SupplyChainGHGEmissionFactors_v1.3.0_NAICS_CO2e_USD2022.csv"
-    local_path = "/opt/spark-data/SupplyChainGHGEmissionFactors.csv"
-    download_dataset(url, local_path)
+    dst_dir = "./dst"
+    csv_file_path = download_dataset(url, dst_dir)
 
     # Step 2: Spark Session
     spark = SparkSession.builder.appName("GHG-DataLoader").getOrCreate()
 
     # Step 3: Read CSV
-    df = spark.read.option("header", True).csv(local_path)
+    df = spark.read.option("header", True).csv(csv_file_path)
     df.printSchema()
 
     # Step 4: Word Count Before Merge
     print("🔁 Word Count BEFORE merge:")
     run_word_count(df)
 
-    # Step 5: Merge GHG + Unit
+    # Step 5: Merge GHG + Unit (stubbed for now)
     df = merge_ghg_unit_columns(df)
 
     # Step 6: Word Count After Merge
@@ -71,11 +77,10 @@ def main():
     # Step 7: View Sample Output
     df.show(10, truncate=False)
 
-    # Step 8: Save to JSON
-    df.write.mode("overwrite").json("/opt/spark-data/SupplyChainGHGEmissionFactors.csv")
-
+    # Step 8: Save to JSON (you could also do .json())
+    df.write.mode("overwrite").csv(dst_dir + "/output")
+    time.sleep(5)
     spark.stop()
     print("✅ Spark job completed.")
-
 if __name__ == "__main__":
     main()
