@@ -1,3 +1,4 @@
+import logging
 import time
 
 from pyspark.sql import SparkSession
@@ -52,12 +53,21 @@ def merge_ghg_unit_columns(df):
 
 def main():
     # Step 1: Download
+
+    time.sleep(5)
+    print("Starting main for word count  MANJORY after sleep")
     url = "https://pasteur.epa.gov/uploads/10.23719/1531143/SupplyChainGHGEmissionFactors_v1.3.0_NAICS_CO2e_USD2022.csv"
-    dst_dir = "./dst"
+    dst_dir = "/opt/bitnami/spark/docker-spark/dst/"
+
     csv_file_path = download_dataset(url, dst_dir)
 
     # Step 2: Spark Session
-    spark = SparkSession.builder.appName("GHG-DataLoader").getOrCreate()
+    # spark = SparkSession.builder.appName("GHG-DataLoader").getOrCreate()
+    spark = SparkSession.builder \
+    .appName("GHG-DataLoader") \
+    .master("local[*]") \
+    .getOrCreate()
+
 
     # Step 3: Read CSV
     df = spark.read.option("header", True).csv(csv_file_path)
@@ -78,8 +88,24 @@ def main():
     df.show(10, truncate=False)
 
     # Step 8: Save to JSON (you could also do .json())
-    df.write.mode("overwrite").csv(dst_dir + "/output")
-    time.sleep(5)
+    df.write.mode("overwrite").csv(dst_dir + "output")
+    infos = spark.sparkContext._jsc.sc().statusTracker().getExecutorInfos()
+    for info in infos:
+        print("EXXECUTOR INFO::::::::::::::::::::::::::::::::::::::::::::::::",dir(info))  # List available methods/properties
+        print(info.toString())
+    print("🕓 Job done. Sleeping to keep container alive for inspection.")
+
+    # try:
+    #     print("🕓 Job done. Sleeping to keep container alive for inspection.")
+    #     while True:
+    #         time.sleep(60)
+    # except KeyboardInterrupt:
+    #     print("🛑 Interrupted.")
+    # finally:
+    #     spark.stop()
+
+    # time.sleep(500)
+    # spark.streams.awaitAnyTermination()
     spark.stop()
     print("✅ Spark job completed.")
 if __name__ == "__main__":

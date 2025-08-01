@@ -1,0 +1,52 @@
+What we couldn't fully accomplish:
+Docker container lifecycle confusion:
+
+You had multiple Spark-related containers exiting soon after start.
+
+Attempts to restart spark-master didn’t keep it running or show up in docker ps.
+
+You ran into issues running commands inside containers because containers were stopped or exited.
+
+You tried docker exec commands on containers that were not running.
+
+There was confusion about how to properly keep the Spark master container alive and interactive.
+
+Port and network troubleshooting:
+
+You tried remapping Spark UI port from 8081 to 8085.
+
+Curl commands to localhost ports 8080, 8081, 8085 failed or reset connections.
+
+You questioned if port remapping in Docker Compose was correct but didn’t fully verify connectivity or container logs afterward.
+
+Debugging Spark job container logs:
+
+The job ran and completed successfully inside the container but the container exited immediately afterward.
+
+You wanted help interpreting long logs to identify issues but the job appeared to finish cleanly.
+
+You saw a common Hadoop native library warning which we confirmed as non-critical.
+
+What you achieved:
+Successfully submitted a Spark job inside a container (spark-submit).
+
+Confirmed that Spark jobs completed successfully with logs.
+
+Identified that containers exited after job completion, which is expected behavior unless containers run services persistently.
+
+Confirmed the common Hadoop native library warning is harmless.
+
+Recommended next steps / problem focus:
+If you want to keep Spark services running interactively:
+
+You can start Spark master and workers with long-running commands (e.g., run the master in the foreground).
+
+Consider using Docker Compose with services configured to run in the foreground.
+
+If you want to submit batch jobs and analyze outputs:
+
+Focus on managing container lifecycle (maybe run jobs inside containers and save results to volumes).
+
+Confirm ports are correctly mapped and accessible from host.
+
+Otherwise, ready to move to your next problem or project!
